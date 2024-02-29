@@ -18,6 +18,11 @@ let weather_arr = [
 async function checkWeather(city) {
   try {
     const response = await fetch(apiUrl + city + `&appid=${apiKey}`);
+
+    if (response.status == 404) {
+      alert("Invalid City Name");
+    }
+
     var weatherData = await response.json();
     console.log(weatherData);
 
@@ -38,7 +43,7 @@ async function checkWeather(city) {
     weatherIcon.src = `images/${weatherData.weather[0].main.toLowerCase()}.png`;
   }
 
-  document.querySelector(".weather-details").style.display = "block"
+  document.querySelector(".weather-details").style.display = "block";
 }
 
 searchBtn.addEventListener("click", () => {
